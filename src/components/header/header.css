@@ -1,8 +1,12 @@
 header {
-  display: flex;
   height: 66px;
-  justify-content: space-between;
   background-color: #5a5a5a;
+}
+
+.header-shell {
+  display: flex;
+  height: inherit;
+  justify-content: space-between;
 }
 
 .logo {

@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import './App.css';
 
-import { Container, Header, Footer } from './components';
+import { Header, Footer } from './components';
 
 function App() {
   const handleClick = () => {
@@ -9,13 +9,13 @@ function App() {
   }
 
   return (
-    <Container>
+    <>
       <Header />
       <main>
         <Button type="primary" onClick={handleClick}>Click</Button>
       </main>
       <Footer />
-    </Container>
+    </>
   );
 }
 
