@@ -1,6 +1,9 @@
 footer {
   display: flex;
-  height: 44px;
-  justify-content: space-between;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
   background-color: #5a5a5a;
+  color: white;
+  font-size: 16px;
 }

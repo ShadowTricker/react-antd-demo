@@ -1,4 +1,6 @@
 import './header.css';
+import { Link } from "react-router-dom";
+
 
 import Container from '../container/container';
 
@@ -9,11 +11,11 @@ export default function Header() {
       <Container>
         <div className="header-shell">
           <div className="logo"></div>
-          <ul className="header-tab">
-            <li>HOME</li>
-            <li>ARTICLES</li>
-            <li>USER</li>
-          </ul>
+          <nav className="navigator">
+            <Link to="/">HOME</Link>
+            <Link to="/articles">ARTICLES</Link>
+            <Link to="/about">ABOUT</Link>
+          </nav>
         </div>
       </Container>
     </header>

@@ -2,7 +2,7 @@ import './footer.css';
 
 const Footer = () => {
   return (
-    <footer>Footer</footer>
+    <footer>Create By &copy;<i>ShadowTricker</i></footer>
   );
 };
 
