@@ -7,7 +7,7 @@ const Paragraph = ({
   }
 }) => {
   return (
-    <section>
+    <section className="paragraph">
       <h1>{ title }</h1>
       {
         sentences && sentences.map(s => <p key={s}>{ s }</p>)

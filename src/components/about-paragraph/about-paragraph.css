@@ -1,13 +1,13 @@
-h1, p {
+.paragraph h1, .paragraph p {
   text-align: center;
 }
 
-h1 {
+.paragraph h1 {
   font-size: 40px;
   color: #521751;
   font-weight: 700;
 }
 
-section {
+.paragraph {
   margin: 30px 10px;
 }

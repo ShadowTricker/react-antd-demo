@@ -1,0 +1,23 @@
+.article-container {
+  margin: 20px auto;
+}
+
+.article-container h1 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.author-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.author {
+  font-size: 16px;
+}
+
+.article-content {
+  margin: 20px auto;
+  font-size: 20px;
+}
