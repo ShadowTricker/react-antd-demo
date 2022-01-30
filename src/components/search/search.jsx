@@ -4,9 +4,7 @@ import './search.css';
 const { Search } = Input;
 
 const SearchContainer = ({
-  value,
   handleSearch,
-  handleInput,
   style
 }) => {
   return (
@@ -15,8 +13,6 @@ const SearchContainer = ({
       size="large"
       enterButton
       onSearch={handleSearch}
-      onChange={handleInput}
-      value={value}
       style={{
         fontSize: 16,
         color: '#1890ff',

@@ -1,6 +1,10 @@
+import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Row, Col } from "antd";
+import { useEffect } from "react";
 import { Container } from "../../components";
 import "./article-edit.css";
+
+import axiosInstance from "../../utils/axios";
 
 const { TextArea } = Input;
 
@@ -9,9 +13,63 @@ const autoSize = {
   maxRows: 16,
 };
 
-const ArticleEdit = ({ id, title, content }) => {
-  const handleFinish = (v) => {
-    console.log(v);
+const ArticleEdit = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const formInitialValue = {
+    articleTitle: '',
+    articleContent: ''
+  };
+
+  useEffect(() => {
+    if (!id && id !== 0) {
+      return;
+    }
+    const getArticle = async id => {
+      const { data: { article } } = await axiosInstance.get(`/articles/${id}`);
+      const { title: articleTitle, content } = article;
+      const contentString = content.join('\n');
+      form.setFieldsValue({ articleTitle, articleContent: contentString });
+    };
+    getArticle(id);
+  }, [id, form]);
+
+  const handleFinish = ({
+    articleTitle,
+    articleContent
+  }) => {
+    const list = (articleContent && articleContent.split('\n')) ||[];
+    const updateArticle = async id => {
+      const { data: { status } } = await axiosInstance.put(
+        `/articles/${ id }`,
+        {
+          title: articleTitle,
+          content: list
+        }
+      );
+      if (status === 'SUCCESS') {
+        navigate('/articles');
+      }
+    };
+    const addArticle = async () => {
+      const { data: { status } } = await axiosInstance.post(`/articles`, {
+        title: articleTitle,
+        content: list
+      });
+      if (status === 'SUCCESS') {
+        navigate('/articles');
+      }
+    };
+    if (id) {
+      updateArticle(id);
+      return;
+    }
+    addArticle();
+  };
+
+  const handleCancel = () => {
+    navigate('/articles');
   };
 
   return (
@@ -25,12 +83,16 @@ const ArticleEdit = ({ id, title, content }) => {
         wrapperCol={{ span: 20 }}
         size="large"
         colon={false}
+        form={form}
+        initialValues={formInitialValue}
         onFinish={handleFinish}
       >
-        <Form.Item label="Article Title" name="article-title">
-          <Input placeholder="Please input your article title!" />
+        <Form.Item label="Article Title" name="articleTitle">
+          <Input
+            placeholder="Please input your article title!"
+          />
         </Form.Item>
-        <Form.Item label="Article Content" name="article-content">
+        <Form.Item label="Article Content" name="articleContent">
           <TextArea
             autoSize={autoSize}
             placeholder="Please input your article content!"
@@ -45,7 +107,7 @@ const ArticleEdit = ({ id, title, content }) => {
               </Button>
             </Col>
             <Col>
-              <Button htmlType="button">CANCEL</Button>
+              <Button htmlType="button" onClick={handleCancel}>CANCEL</Button>
             </Col>
           </Row>
         </Form.Item>

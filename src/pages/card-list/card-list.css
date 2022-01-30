@@ -1,0 +1,5 @@
+.article-func {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 60px;
+}

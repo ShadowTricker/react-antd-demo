@@ -1,0 +1,58 @@
+const router = require('express').Router();
+const {
+  getModel,
+  getArticle,
+  addArticle,
+  updateArticle,
+  deleteArticle
+} = require('../models');
+
+router.get('/', async (req, res) => {
+  const { model: articles } = await getModel('articles');
+  res.status(200)
+    .json({
+      status: 'SUCCESS',
+      articles
+    });
+});
+
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  const article = await getArticle(id);
+  res.status(200).json({
+    status: 'SUCCESS',
+    article
+  });
+});
+
+router.post('/', async (req, res) => {
+  const articleNeedAdd = req.body;
+  const articles = await addArticle(articleNeedAdd);
+  res.status(200).json({
+    status: 'SUCCESS',
+    // articles
+  })
+});
+
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const articleNeedUpdate = req.body;
+  console.log(articleNeedUpdate);
+  const articles = await updateArticle(id, articleNeedUpdate);
+  res.status(200).json({
+    status: 'SUCCESS',
+    // articles
+  })
+});
+
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  const articles = await deleteArticle(id);
+  res.status(200).json({
+    status: 'SUCCESS',
+    // articles
+  })
+});
+
+module.exports = router;

@@ -1,0 +1,17 @@
+{
+  "name": "mock-api",
+  "version": "1.0.0",
+  "description": "mock api for react demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -e js ./src/index.js"
+  },
+  "author": "Shadow Tricker",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
