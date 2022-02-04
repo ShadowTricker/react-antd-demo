@@ -40,5 +40,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "a demo with react and ant-d",
+  "main": "index.js",
+  "repository": "https://github.com/ShadowTricker/react-antd-demo.git",
+  "author": "ShadowTricker",
+  "license": "MIT"
 }

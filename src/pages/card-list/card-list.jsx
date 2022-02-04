@@ -1,16 +1,18 @@
 import { Col, Row, Button, Modal } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 
 import { Container, CardContainer, SearchContainer } from "../../components";
 import axiosInstance from '../../utils/axios';
 import "./card-list.css";
 import { EditOutlined, ReadOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { UserInfoContext } from '../../App';
 
 const CardList = () => {
   const [searchValue, setSearchValue] = useState('');
   const [cardData, setCardData] = useState([]);
   const [needRefresh, setNeedRefresh] = useState(false);
+  const { username } = useContext(UserInfoContext);
   const navigate = useNavigate();
 
   const handleSearch = value => {
@@ -20,6 +22,8 @@ const CardList = () => {
   const navigateTo = (path, id) => {
     navigate(`/${ path }/${ id }`);
   };
+
+  const addArticle = () => username ? '/edit' : '/login';
 
   const deleteArticle = async id => {
     const { data: { status } } = await axiosInstance.delete(`/articles/${id}`);
@@ -45,10 +49,18 @@ const CardList = () => {
         onClick={() => navigateTo('article', id)}
       />,
       <EditOutlined key="edit"
-        onClick={() => navigateTo('edit', id)}
+        onClick={() => {
+          username
+            ? navigateTo('edit', id)
+            : navigate('/login');
+        }}
       />,
       <DeleteOutlined key="delete"
-        onClick={() => showDeleteModal(id)}
+        onClick={() => {
+          username
+            ? showDeleteModal(id)
+            : navigate('/login');
+        }}
       />,
     ];
   };
@@ -70,8 +82,9 @@ const CardList = () => {
         />
         <Button type="primary" size="large"
           style={{ marginLeft: '20px' }}
+          onClick={() => navigate(addArticle())}
         >
-          <Link to="/edit">Add Article</Link>
+          Add Article
         </Button>
       </section>
       <Row gutter={[16, 16]} style={{ marginBottom: '40px' }}>

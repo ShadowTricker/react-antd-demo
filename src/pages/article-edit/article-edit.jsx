@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Row, Col } from "antd";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Container } from "../../components";
 import "./article-edit.css";
 
 import axiosInstance from "../../utils/axios";
+import { UserInfoContext } from "../../App";
 
 const { TextArea } = Input;
 
@@ -17,6 +18,7 @@ const ArticleEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const { username } = useContext(UserInfoContext);
   const formInitialValue = {
     articleTitle: '',
     articleContent: ''
@@ -45,7 +47,8 @@ const ArticleEdit = () => {
         `/articles/${ id }`,
         {
           title: articleTitle,
-          content: list
+          content: list,
+          author: username
         }
       );
       if (status === 'SUCCESS') {
@@ -55,7 +58,8 @@ const ArticleEdit = () => {
     const addArticle = async () => {
       const { data: { status } } = await axiosInstance.post(`/articles`, {
         title: articleTitle,
-        content: list
+        content: list,
+        author: username
       });
       if (status === 'SUCCESS') {
         navigate('/articles');

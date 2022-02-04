@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const articleNeedAdd = req.body;
-  const articles = await addArticle(articleNeedAdd);
+  await addArticle(articleNeedAdd);
   res.status(200).json({
     status: 'SUCCESS',
     // articles
@@ -39,7 +39,7 @@ router.put('/:id', async (req, res) => {
   console.log(id);
   const articleNeedUpdate = req.body;
   console.log(articleNeedUpdate);
-  const articles = await updateArticle(id, articleNeedUpdate);
+  await updateArticle(id, articleNeedUpdate);
   res.status(200).json({
     status: 'SUCCESS',
     // articles
@@ -48,7 +48,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  const articles = await deleteArticle(id);
+  await deleteArticle(id);
   res.status(200).json({
     status: 'SUCCESS',
     // articles

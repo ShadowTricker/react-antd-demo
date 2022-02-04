@@ -1,0 +1,27 @@
+.page-introduction {
+  font-size: 18px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.page-introduction h1 {
+  font-size: 40px;
+  color: #521751;
+  font-weight: 700;
+}
+
+.page-introduction p {
+  font-style: italic;
+}
+
+.stories-list {
+  text-align: center;
+  width: 700px;
+  margin: 60px auto;
+}
+
+.stories-list h1 {
+  font-size: 40px;
+  color: #521751;
+  font-weight: 700;
+}
