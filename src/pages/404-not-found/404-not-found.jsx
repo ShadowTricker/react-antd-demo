@@ -4,7 +4,10 @@ import './404-not-found.css';
 const NotFound404 = () => {
 
   const containerStyle = {
-    margin: '60px auto',
+    marginTop: '60px',
+    marginBottom: '60px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   };
 
   return (

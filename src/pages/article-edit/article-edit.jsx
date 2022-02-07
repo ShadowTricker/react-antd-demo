@@ -15,6 +15,13 @@ const autoSize = {
 };
 
 const ArticleEdit = () => {
+  const containerStyle = {
+    marginTop: '60px',
+    marginBottom: '60px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  };
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -78,9 +85,7 @@ const ArticleEdit = () => {
 
   return (
     <Container
-      style={{
-        margin: "60px auto",
-      }}
+      style={containerStyle}
     >
       <Form
         labelCol={{ span: 4 }}

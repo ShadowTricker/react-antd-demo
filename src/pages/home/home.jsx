@@ -9,6 +9,14 @@ import axiosInstance from "../../utils/axios";
 const { Meta } = Card;
 
 export default function Home() {
+  const rowStyle = {
+    width: '700px',
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  };
+
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
@@ -39,7 +47,7 @@ export default function Home() {
       </section>
       <section className="stories-list">
         <h1>Read Stories</h1>
-        <Row gutter={[16, 16]} style={{ width: '700px', margin: '0 auto' }}>
+        <Row gutter={[16, 16]} style={rowStyle}>
           {
             articles && articles.length && articles.map(({ id, title, description }) => (
               <Col span={12} key={id}>
