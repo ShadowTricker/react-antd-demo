@@ -1,11 +1,13 @@
-const router = require('express').Router();
-const {
+import { Router } from 'express';
+import {
   getModel,
   getArticle,
   addArticle,
   updateArticle,
   deleteArticle
-} = require('../models');
+} from '../models/index.js';
+
+const router = Router();
 
 router.get('/', async (req, res) => {
   const { model: articles } = await getModel('articles');
@@ -55,4 +57,4 @@ router.delete('/:id', async (req, res) => {
   })
 });
 
-module.exports = router;
+export default router;

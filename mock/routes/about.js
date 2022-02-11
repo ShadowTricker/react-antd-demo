@@ -1,5 +1,7 @@
-const router = require('express').Router();
-const { getModel } = require('../models');
+import { Router } from 'express';
+import { getModel } from '../models/index.js';
+
+const router = Router();
 
 router.get('/', async (req, res) => {
   const { model: aboutData } = await getModel('about');
@@ -10,4 +12,4 @@ router.get('/', async (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

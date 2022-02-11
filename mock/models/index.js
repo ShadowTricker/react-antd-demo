@@ -1,10 +1,12 @@
-const fs = require('fs');
-const fsPromise = fs.promises;
-const path = require('path');
+import path from 'path';
+import { promises as fsPromise } from 'fs';
 
-const fileName = path.join(__dirname, '../assets/data.json');
+console.log(import.meta.url);
 
-const getModel = async (modelName = null) => {
+// const fileName = path.join(import.meta.url, '../assets/data.json');
+const fileName = new URL('../assets/data.json', import.meta.url);
+
+export const getModel = async (modelName = null) => {
   const dataString = await fsPromise.readFile(fileName, 'utf-8');
   const allModels = JSON.parse(dataString);
   return {
@@ -13,12 +15,12 @@ const getModel = async (modelName = null) => {
   };
 };
 
-const getArticle = async id => {
+export const getArticle = async id => {
   const { model: articleModel } = await getModel('articles');
   return articleModel.find(({ id: oId }) => oId === id);
 };
 
-const addArticle = async article => {
+export const addArticle = async article => {
   const { model: articleModel, allModels } = await getModel('articles');
   const newArticleId = Math.max(...[articleModel.map(({ id }) => Number(id))]) + 1;
   articleModel.push({
@@ -31,7 +33,7 @@ const addArticle = async article => {
   return articleModel;
 };
 
-const updateArticle = async (id, { title, content, author }) => {
+export const updateArticle = async (id, { title, content, author }) => {
   const { model: articleModel, allModels } = await getModel('articles');
   const indexNeedUpdate = articleModel.findIndex(a => a.id === id);
   articleModel.fill(
@@ -50,18 +52,10 @@ const updateArticle = async (id, { title, content, author }) => {
   return articleModel;
 };
 
-const deleteArticle = async id => {
+export const deleteArticle = async id => {
   const { allModels } = await getModel();
   const articleModel = allModels['articles'].filter(({ id: oId }) => oId !== id);
   allModels['articles'] = articleModel;
   await fsPromise.writeFile(fileName, JSON.stringify(allModels), 'utf-8');
   return articleModel;
 };
-
-module.exports = {
-  getModel,
-  getArticle,
-  addArticle,
-  updateArticle,
-  deleteArticle
-}

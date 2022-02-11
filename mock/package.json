@@ -2,6 +2,7 @@
   "name": "mock-api",
   "version": "1.0.0",
   "description": "mock api for react demo",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "nodemon -e js ./src/index.js"

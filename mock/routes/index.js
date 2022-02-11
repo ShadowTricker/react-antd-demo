@@ -1,9 +1,9 @@
+import articlesRouter from './articles.js';
+import aboutRouter from './about.js';
+import loginRouter from './login.js';
 
-
-function routesConfig(app) {
-  app.use('/articles', require('./articles'));
-  app.use('/about', require('./about'));
-  app.use('/login', require('./login'));
+export default function routesConfig(app) {
+  app.use('/articles', articlesRouter);
+  app.use('/about', aboutRouter);
+  app.use('/login', loginRouter);
 }
-
-module.exports = routesConfig;
